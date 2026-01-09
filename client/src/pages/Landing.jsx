@@ -9,10 +9,12 @@ import { Boxes } from '@/components/ui/background-boxes';
 const Landing = () => {
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 text-white overflow-hidden">
-            {/* Animated Background Elements */}
-            <div className="fixed inset-0 overflow-hidden pointer-events-none">
-               <Boxes />
+        <div className="min-h-screen bg-background text-foreground transition-colors duration-300 overflow-hidden">
+            {/* Animated Background Elements - Subtle Gradient layer */}
+            <div className="fixed inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5 pointer-events-none" />
+
+            <div className="fixed inset-0 overflow-hidden pointer-events-none opacity-40 dark:opacity-100">
+                <Boxes />
             </div>
 
             {/* Navigation */}
