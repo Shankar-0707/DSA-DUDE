@@ -43,7 +43,7 @@ const Landing_hero = () => {
                         <Button
                             size="lg"
                             className="w-full sm:w-auto bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-8 py-5 md:py-6 text-base md:text-lg shadow-2xl shadow-orange-500/50 group"
-                            onClick={() => navigate('/home')}
+                            onClick={() => navigate('/login')}
                         >
                             <Play className="mr-2 w-4 md:w-5 h-4 md:h-5 group-hover:scale-110 transition-transform" />
                             Start Visualizing

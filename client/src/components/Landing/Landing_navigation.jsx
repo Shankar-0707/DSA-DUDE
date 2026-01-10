@@ -22,7 +22,7 @@ const Landing_navigation = () => {
                     <Button
                         variant="ghost"
                         className="hidden sm:flex text-foreground hover:bg-accent/50"
-                        onClick={() => navigate('/LogIn')}
+                        onClick={() => navigate('/Login')}
                     >
                         Sign In
                     </Button>
@@ -36,7 +36,7 @@ const Landing_navigation = () => {
                     </Button>
                     <Button
                         className="hidden md:flex bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white shadow-lg shadow-orange-500/50"
-                        onClick={() => navigate('/SignIn')}
+                        onClick={() => navigate('/signup')}
                     >
                         Get Started
                         <ArrowRight className="ml-2 w-4 h-4" />
