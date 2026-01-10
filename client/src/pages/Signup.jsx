@@ -9,6 +9,7 @@ import {
     CardTitle,
 } from '@/components/ui/card';
 import { Boxes } from '@/components/ui/background-boxes';
+import { Link } from "react-router-dom";
 
 const Signup = () => {
     return (
@@ -98,7 +99,9 @@ const Signup = () => {
                 </CardContent>
                 <CardFooter>
                     <p className="text-sm text-muted-foreground text-center w-full">
-                        Already have an account? <a href="/login" className="text-primary hover:underline">Sign in</a>
+                        Already have an account? <Link to="/login" className="text-primary hover:underline">
+                            Sign in
+                        </Link>
                     </p>
                 </CardFooter>
             </Card>
