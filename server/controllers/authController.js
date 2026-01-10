@@ -127,3 +127,15 @@ export const logout = async (req, res) => {
 
     res.status(200).json({ message: "Logout successful" });
 }
+
+export const getUser = async (req, res) => {
+    res.status(200).json({
+        success: true,
+        user: {
+            id: req.user._id,
+            name: req.user.name,
+            username: req.user.username,
+            email: req.user.email,
+        },
+    });
+}

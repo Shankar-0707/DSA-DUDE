@@ -3,13 +3,24 @@ import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import { Button } from './ui/button';
 import { ModeToggle } from './mode-toggle';
+import { useAuth } from '../context/AuthContext';
+import API from '../api/api';
 
 const Navbar = () => {
     const navigate = useNavigate();
+    const { logout } = useAuth();
 
-    const handleLogout = () => {
-        // Implement actual logout logic here (e.g., clearing tokens)
-        navigate('/login');
+    const handleLogout = async () => {
+        try {
+            await API.post('/auth/logout');
+            logout(); // Clear client-side state
+            navigate('/login');
+        } catch (error) {
+            console.error('Logout failed:', error);
+            // Even if backend fails, we should clear client state to be safe
+            logout();
+            navigate('/login');
+        }
     };
 
     return (

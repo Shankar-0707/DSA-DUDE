@@ -2,6 +2,7 @@ import Landing_navigation from '@/components/Landing/Landing_navigation';
 import Landing_hero from '@/components/Landing/Landing_hero';
 import Landing_howworks from '@/components/Landing/Landing_howworks';
 import Landing_Features from '@/components/Landing/Landing_Features';
+import Landing_FAQs from '@/components/Landing/Landing_FAQs';
 import Landing_CTA from '@/components/Landing/Landing_CTA';
 import Landing_footer from '@/components/Landing/Landing_footer';
 import { Boxes } from '@/components/ui/background-boxes';
@@ -30,6 +31,9 @@ const Landing = () => {
 
             {/* Features Grid */}
             <Landing_Features />
+
+            {/* FAQ Section */}
+            <Landing_FAQs />
 
             {/* CTA Section */}
             <Landing_CTA />
