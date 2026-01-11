@@ -1,15 +1,32 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
-const apiKey = process.env.GEMINI_API_KEY;
-
-if (!apiKey) {
-    console.error("CRITICAL: GEMINI_API_KEY is not defined in environment variables!");
+if (!GEMINI_API_KEY) {
+  throw new Error("GEMINI_API_KEY missing");
 }
 
-const genAI = new GoogleGenerativeAI(apiKey);
+const GEMINI_ENDPOINT =
+  "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
 
-const model = genAI.getGenerativeModel({
-    model: "gemini-2.0-flash"
-});
+export async function callGemini(prompt) {
+  const response = await fetch(`${GEMINI_ENDPOINT}?key=${GEMINI_API_KEY}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      contents: [
+        {
+          parts: [{ text: prompt }],
+        },
+      ],
+    }),
+  });
 
-export default model;
+  if (!response.ok) {
+    const errText = await response.text();
+    throw new Error(errText);
+  }
+
+  const data = await response.json();
+  return data.candidates[0].content.parts[0].text;
+}

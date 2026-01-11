@@ -21,11 +21,13 @@ const AIProblem = () => {
         setSolutionResult(null);
         try {
             console.log("first");
-            const response = await API.post('/ai/search-name', { name: searchQuery }, {withCredentials : true});
+            const response = await API.post('/ai/search-name', { name: searchQuery }, { withCredentials: true });
             setFoundProblem(response.data);
             console.log("second");
         } catch (error) {
             console.error('Search failed:', error);
+            const errorMessage = error.response?.data?.error || "Failed to search problem. Please try again.";
+            toast.error(errorMessage);
         } finally {
             setLoading(false);
         }
@@ -42,6 +44,8 @@ const AIProblem = () => {
             setSolutionResult(response.data);
         } catch (error) {
             console.error('Analysis failed:', error);
+            const errorMessage = error.response?.data?.error || "Failed to analyze problem. Please try again.";
+            toast.error(errorMessage);
         } finally {
             setSolvingLoading(false);
         }
@@ -200,8 +204,8 @@ const AIProblem = () => {
                                                         onClick={handleSave}
                                                         disabled={saved}
                                                         className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all text-xs font-bold uppercase tracking-wider ${saved
-                                                                ? 'bg-emerald-500 text-white border-emerald-500 cursor-default'
-                                                                : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20 hover:bg-emerald-500/20'
+                                                            ? 'bg-emerald-500 text-white border-emerald-500 cursor-default'
+                                                            : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20 hover:bg-emerald-500/20'
                                                             }`}
                                                     >
                                                         {saved ? (
