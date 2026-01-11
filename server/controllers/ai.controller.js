@@ -13,6 +13,7 @@ const extractJSON = (text) => {
 };
 
 export const solveProblem = async (req, res) => {
+    let result;
     try {
         const { problem, constraints } = req.body;
 
@@ -21,6 +22,7 @@ export const solveProblem = async (req, res) => {
                 error: "problem is too short or missing"
             })
         }
+
 
         const prompt = `
 You are a competitive programming expert.
@@ -52,7 +54,7 @@ STRICT OUTPUT FORMAT (JSON ONLY):
 IMPORTANT: DO NOT include any conversational text, explanations or markdown blocks before or after the JSON. Return ONLY the JSON object.
 `;
 
-        const result = await model.generateContent(prompt);
+        result = await model.generateContent(prompt);
         const text = result.response.text();
 
         // ⚠️ Gemini sometimes adds markdown or filler, extract only JSON
@@ -86,6 +88,7 @@ IMPORTANT: DO NOT include any conversational text, explanations or markdown bloc
 }
 
 export const searchProblemByName = async (req, res) => {
+    let result;
     try {
         const { name } = req.body;
 
@@ -111,7 +114,7 @@ STRICT OUTPUT FORMAT (JSON ONLY):
 IMPORTANT: DO NOT include any conversational text, explanations or markdown blocks before or after the JSON. Return ONLY the JSON object.
 `;
 
-        const result = await model.generateContent(prompt);
+        result = await model.generateContent(prompt);
         const text = result.response.text();
         const cleaned = extractJSON(text);
         const parsed = JSON.parse(cleaned);
@@ -128,10 +131,15 @@ IMPORTANT: DO NOT include any conversational text, explanations or markdown bloc
         return res.json(parsed);
     } catch (error) {
         console.error("AI Search Error:", error.message);
+
+
         const rawText = result?.response?.text() || "No response text";
         console.log("Raw Search Snippet:", rawText.substring(0, 500));
         return res.status(500).json({
-            error: "Failed to find problem details - AI returned malformed data"
+            error: "Failed to find problem details",
+            details: error.message,
+            rawText: result?.response?.text() || "No response text available",
+            stack: error.stack
         });
     }
 }

@@ -5,7 +5,8 @@ import Landing_Features from '@/components/Landing/Landing_Features';
 import Landing_FAQs from '@/components/Landing/Landing_FAQs';
 import Landing_CTA from '@/components/Landing/Landing_CTA';
 import Landing_footer from '@/components/Landing/Landing_footer';
-import { Boxes } from '@/components/ui/background-boxes';
+
+import { BackgroundRippleEffect } from '@/components/ui/background-ripple-effect';
 
 const Landing = () => {
 
@@ -15,7 +16,7 @@ const Landing = () => {
             <div className="fixed inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5 pointer-events-none" />
 
             <div className="fixed inset-0 overflow-hidden pointer-events-none opacity-40 dark:opacity-100">
-                <Boxes />
+                <BackgroundRippleEffect />
             </div>
 
             {/* Navigation */}

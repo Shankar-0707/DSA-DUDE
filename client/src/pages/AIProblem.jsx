@@ -20,8 +20,10 @@ const AIProblem = () => {
         setFoundProblem(null);
         setSolutionResult(null);
         try {
-            const response = await API.post('/ai/search-name', { name: searchQuery });
+            console.log("first");
+            const response = await API.post('/ai/search-name', { name: searchQuery }, {withCredentials : true});
             setFoundProblem(response.data);
+            console.log("second");
         } catch (error) {
             console.error('Search failed:', error);
         } finally {
