@@ -96,7 +96,7 @@ const Signup = () => {
 
                         <div className="space-y-2">
                             <label htmlFor="username" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                                Username
+                                Create Your Own UserName
                             </label>
                             <input
                                 id="username"

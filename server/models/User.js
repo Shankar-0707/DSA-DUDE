@@ -29,6 +29,11 @@ const userSchema = new mongoose.Schema(
       minlength: 6,
       select: false, // IMPORTANT
     },
+    loginActivity: [
+      {
+        type: Date,
+      },
+    ],
   },
   { timestamps: true }
 );

@@ -39,6 +39,28 @@ const Navbar = () => {
                     </span>
                 </div>
 
+                {/* Center: Navigation Links */}
+                <div className="hidden md:flex items-center gap-6">
+                    <button
+                        onClick={() => navigate('/home')}
+                        className="text-sm font-medium text-foreground/70 hover:text-foreground transition-colors cursor-pointer"
+                    >
+                        Home
+                    </button>
+                    <button
+                        onClick={() => navigate('/problems')}
+                        className="text-sm font-medium text-foreground/70 hover:text-orange-500 transition-colors cursor-pointer"
+                    >
+                        Approaches
+                    </button>
+                    <button
+                        onClick={() => navigate('/saved-problems')}
+                        className="text-sm font-medium text-foreground/70 hover:text-orange-500 transition-colors cursor-pointer"
+                    >
+                        Saved
+                    </button>
+                </div>
+
                 {/* Right Side: Theme Toggle, Profile, Logout */}
                 <div className="flex items-center gap-2 md:gap-4 shrink-0">
                     <ModeToggle />
@@ -49,6 +71,7 @@ const Navbar = () => {
                         size="icon"
                         className="rounded-full w-10 h-10 hover:bg-accent/50 transition-colors"
                         title="Profile"
+                        onClick={() => navigate("/profile")}
                     >
                         <User className="h-5 w-5 text-foreground/80" />
                         <span className="sr-only">Profile</span>

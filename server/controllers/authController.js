@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import User from "../models/User.js";
 import { generateToken } from "../utils/generateToken.js"
 
+
 export const signup = async (req, res, next) => {
     try {
         if (!req.body) {
@@ -94,6 +95,19 @@ export const login = async (req, res, next) => {
             return res.status(401).json({ message: "Invalid credentials" });
         }
 
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        // Update login activity
+        const alreadyLoggedToday = user.loginActivity.some(
+            (date) => new Date(date).getTime() === today.getTime()
+        );
+
+        if (!alreadyLoggedToday) {
+            user.loginActivity.push(today);
+            await user.save();
+        }
+
         // 3.) generate Token
         const token = generateToken(user._id);
 
@@ -139,3 +153,4 @@ export const getUser = async (req, res) => {
         },
     });
 }
+
