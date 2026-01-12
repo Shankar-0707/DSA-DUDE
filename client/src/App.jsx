@@ -12,6 +12,7 @@ import SavedProblems from "./pages/SavedProblems";
 import SavedProblemDetails from "./pages/SavedProblemDetails";
 import { Toaster } from "react-hot-toast";
 import Profile from "./pages/Profile";
+import Visualize from "./pages/Visualize"
 
 const App = () => {
   return (
@@ -55,6 +56,7 @@ const App = () => {
           <Route path="/profile" element={<ProtectedRoute> <Profile /></ProtectedRoute>} />
           <Route path="/saved-problems" element={<ProtectedRoute> <SavedProblems /></ProtectedRoute>} />
           <Route path="/saved-problem/:id" element={<ProtectedRoute> <SavedProblemDetails /></ProtectedRoute>} />
+          <Route path="/visualize" element={<ProtectedRoute> <Visualize /></ProtectedRoute>} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
         </Routes>

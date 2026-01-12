@@ -59,6 +59,13 @@ const Navbar = () => {
                     >
                         Saved
                     </button>
+
+                     <button
+                        onClick={() => navigate('/visualize')}
+                        className="text-sm font-medium text-foreground/70 hover:text-orange-500 transition-colors cursor-pointer"
+                    >
+                        Visualize
+                    </button>
                 </div>
 
                 {/* Right Side: Theme Toggle, Profile, Logout */}
