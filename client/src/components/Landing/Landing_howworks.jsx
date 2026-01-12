@@ -38,36 +38,29 @@ const Landing_howworks = () => {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
                     {arr.map((item, index) => (
                         <Card
                             key={index}
-                            className="relative bg-card border-border backdrop-blur-xl p-6 md:p-8 hover:transform hover:scale-[1.02] transition-all duration-300 group overflow-hidden"
+                            className="relative bg-card/60 border-border/50 backdrop-blur-2xl p-8 hover:transform hover:scale-[1.02] transition-all duration-500 group overflow-hidden rounded-3xl"
                         >
-                            {/* Background accent */}
-                            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                            {/* Step indicator - refined */}
-                            <div className="absolute top-4 right-4 text-6xl md:text-7xl font-black text-primary/5 group-hover:text-primary/10 transition-all duration-500 select-none">
+                            {/* Step hint */}
+                            <div className="absolute top-4 right-6 text-7xl font-black text-orange-500/5 group-hover:text-orange-500/10 transition-all duration-700 select-none font-mono">
                                 {item.step}
                             </div>
 
-                            {/* Icon container - cleaner */}
-                            <div className="relative z-10 mb-6 md:mb-8">
-                                <div className="absolute inset-0 bg-primary/20 blur-xl rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                <div className="relative w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center transform group-hover:rotate-6 transition-all duration-300 shadow-lg shadow-orange-500/30">
-                                    <item.icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
+                            {/* Icon container */}
+                            <div className="relative z-10 mb-8">
+                                <div className="relative w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center transform group-hover:rotate-12 transition-all duration-500 shadow-xl shadow-orange-500/20">
+                                    <item.icon className="w-7 h-7 text-white" />
                                 </div>
                             </div>
 
                             {/* Content */}
-                            <div className="relative z-10 space-y-3 md:space-y-4">
-                                <h3 className="text-lg md:text-xl font-semibold text-foreground tracking-tight">{item.title}</h3>
-                                <p className="text-muted-foreground leading-relaxed text-xs md:text-sm font-light">{item.description}</p>
+                            <div className="relative z-10 space-y-4">
+                                <h3 className="text-xl font-bold text-foreground italic">{item.title}</h3>
+                                <p className="text-muted-foreground leading-relaxed text-sm md:text-base font-medium opacity-80">{item.description}</p>
                             </div>
-
-                            {/* Subtle border effect on hover */}
-                            <div className="absolute inset-0 border border-transparent group-hover:border-primary/20 rounded-lg transition-all duration-300" />
                         </Card>
                     ))}
                 </div>

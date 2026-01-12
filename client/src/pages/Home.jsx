@@ -56,55 +56,92 @@ const Home = () => {
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-orange-500/10 blur-[120px] rounded-full -z-10" />
                 </header>
 
-                {/* Features Grid */}
+                {/* What is DSA? Section */}
                 <section className="py-20 bg-muted/30 border-y border-border/40">
                     <div className="container mx-auto px-4">
-                        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                            <FeatureCard
-                                icon={<Search className="w-8 h-8 text-orange-500" />}
-                                title="Instant Problem Search"
-                                description="Can't find a problem? Just type the name. Our AI fetches details from our vast database of LeetCode & CP problems."
-                            />
-                            <FeatureCard
-                                icon={<Brain className="w-8 h-8 text-orange-500" />}
-                                title="Deep Logic Breakdowns"
-                                description="Don't just memorize code. Understand the 'Why' and 'How' with our step-by-step intuitive explanations."
-                            />
-                            <FeatureCard
-                                icon={<Code2 className="w-8 h-8 text-orange-500" />}
-                                title="Multi-Language Support"
-                                description="Get optimized solutions in C++, Java, and Python automatically, with green-highlighted comments."
-                            />
-                        </div>
-                    </div>
-                </section>
-
-                {/* How It Works Snippet */}
-                <section className="py-20 container mx-auto px-4">
-                    <div className="max-w-5xl mx-auto bg-card rounded-3xl border border-border/50 overflow-hidden shadow-2xl relative">
-                        <div className="grid md:grid-cols-2">
-                            <div className="p-8 md:p-12 space-y-6 flex flex-col justify-center">
-                                <h2 className="text-3xl font-bold">Why DSA-DUDE?</h2>
-                                <ul className="space-y-4">
-                                    <ListItem text="Save hours of searching for editorials" />
-                                    <ListItem text="Understand complex constraints easily" />
-                                    <ListItem text="Prepare for FAANG interviews efficiently" />
-                                    <ListItem text="Track your daily consistency" />
-                                </ul>
+                        <div className="max-w-4xl mx-auto space-y-12">
+                            <div className="text-center space-y-4">
+                                <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
+                                    What is <span className="text-orange-500 underline decoration-orange-500/30 underline-offset-8">DSA</span>?
+                                </h2>
+                                <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
+                                    The building blocks of software engineering that define how we store and process data efficiently.
+                                </p>
                             </div>
-                            <div className="bg-muted/50 p-8 md:p-12 flex items-center justify-center border-l border-border/50">
-                                <div className="text-center space-y-4">
-                                    <div className="inline-block p-4 rounded-2xl bg-orange-500/10 mb-2">
-                                        <Zap className="w-12 h-12 text-orange-500" />
+
+                            <div className="grid md:grid-cols-2 gap-8">
+                                <div className="p-8 rounded-3xl bg-card border border-border/50 space-y-4 hover:shadow-2xl transition-all duration-500 group">
+                                    <div className="w-16 h-16 rounded-2xl bg-orange-500/10 flex items-center justify-center group-hover:scale-110 transition-transform shadow-xl shadow-orange-500/5">
+                                        <Code2 className="w-8 h-8 text-orange-500" />
                                     </div>
-                                    <h3 className="text-xl font-bold">Lightning Fast Analysis</h3>
-                                    <p className="text-muted-foreground text-sm">
-                                        "I pasted a hard DP problem and got a recursive solution with memoization in seconds."
+                                    <h3 className="text-2xl font-bold italic">Data Structures</h3>
+                                    <p className="text-muted-foreground leading-relaxed">
+                                        The specialized format for organizing and storing data. Think of it as a <span className="text-foreground font-medium underline decoration-orange-500/20">container</span> that holds information in a way that makes it easy to access and modify.
+                                    </p>
+                                </div>
+
+                                <div className="p-8 rounded-3xl bg-card border border-border/50 space-y-4 hover:shadow-2xl transition-all duration-500 group">
+                                    <div className="w-16 h-16 rounded-2xl bg-orange-500/10 flex items-center justify-center group-hover:scale-110 transition-transform shadow-xl shadow-orange-500/5">
+                                        <Zap className="w-8 h-8 text-orange-500" />
+                                    </div>
+                                    <h3 className="text-2xl font-bold italic">Algorithms</h3>
+                                    <p className="text-muted-foreground leading-relaxed">
+                                        The step-by-step instructions for solving a problem. It's the <span className="text-foreground font-medium underline decoration-orange-500/20">logic</span> used to perform operations on your data structures to reach a desired outcome.
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </section>
+
+                {/* DSA Roadmap Section */}
+                <section className="py-24 relative overflow-hidden">
+                    <div className="container mx-auto px-4 relative z-10">
+                        <div className="max-w-6xl mx-auto space-y-16">
+                            <div className="text-center space-y-4">
+                                <h2 className="text-4xl md:text-6xl font-bold italic">The Roadmap to Mastery</h2>
+                                <p className="text-muted-foreground text-lg">Your step-by-step guide from foundations to elite technical interviews.</p>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
+                                {/* Roadmap Steps */}
+                                <RoadmapStep
+                                    number="01"
+                                    title="Foundations"
+                                    topics={["Arrays", "Strings", "Complexity Analysis"]}
+                                    color="bg-orange-500"
+                                />
+                                <RoadmapStep
+                                    number="02"
+                                    title="Linear Structures"
+                                    topics={["Linked Lists", "Stacks", "Queues"]}
+                                    color="bg-amber-500"
+                                />
+                                <RoadmapStep
+                                    number="03"
+                                    title="Hierarchical"
+                                    topics={["Trees", "Graphs", "Heaps"]}
+                                    color="bg-orange-400"
+                                />
+                                <RoadmapStep
+                                    number="04"
+                                    title="Advanced Logic"
+                                    topics={["DP", "Sliding Window", "Greedy"]}
+                                    color="bg-orange-600"
+                                />
+                            </div>
+
+                            <div className="pt-12 flex justify-center">
+                                <div className="p-1 px-1 bg-muted rounded-full border border-border/50 flex items-center gap-4">
+                                    <button className="px-6 py-2 rounded-full text-sm font-bold bg-orange-500 text-white shadow-lg">Begin Learning</button>
+                                    <span className="text-xs text-muted-foreground pr-6 font-medium">Over 200+ Interactive Problems</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Roadmap Glow */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[300px] bg-orange-500/5 blur-[150px] -z-10" />
                 </section>
             </div>
         </div>
@@ -112,6 +149,31 @@ const Home = () => {
 };
 
 // Helper Components
+function RoadmapStep({ number, title, topics, color }) {
+    return (
+        <div className="relative p-6 rounded-3xl bg-card border border-border/50 hover:border-orange-500/30 transition-all group overflow-hidden">
+            <div className={`absolute top-0 right-0 w-24 h-24 ${color} opacity-[0.03] -mr-8 -mt-8 rounded-full group-hover:scale-150 transition-transform duration-700`} />
+            <div className="space-y-4 relative z-10">
+                <div className="flex items-center justify-between">
+                    <span className={`text-4xl font-black opacity-10 font-mono`}>{number}</span>
+                    <div className={`w-2 h-2 rounded-full ${color}`} />
+                </div>
+                <div>
+                    <h3 className="text-xl font-bold mb-3">{title}</h3>
+                    <ul className="space-y-2">
+                        {topics.map((topic, i) => (
+                            <li key={i} className="text-sm text-muted-foreground flex items-center gap-2">
+                                <div className={`w-1 h-1 rounded-full ${color}/50`} />
+                                {topic}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    );
+}
+
 function FeatureCard({ icon, title, description }) {
     return (
         <div className="p-6 rounded-2xl bg-background border border-border/50 hover:border-orange-500/30 hover:shadow-lg transition-all space-y-4 group">

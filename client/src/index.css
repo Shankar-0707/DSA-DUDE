@@ -121,5 +121,33 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Custom Premium Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-white/10 rounded-full border-2 border-transparent bg-clip-padding transition-colors;
+    border-radius: 20px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-orange-500/40;
+  }
+
+  /* Specific styling for code blocks and textareas */
+  .scrollbar-premium::-webkit-scrollbar-thumb {
+    @apply bg-white/20;
+  }
+
+  .scrollbar-premium::-webkit-scrollbar-thumb:hover {
+    @apply bg-orange-500/60;
+  }
 }
 

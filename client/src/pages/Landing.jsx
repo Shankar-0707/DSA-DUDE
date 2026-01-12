@@ -26,14 +26,15 @@ const Landing = () => {
             <Landing_hero />
 
 
-            {/* How It Works */}
-            <Landing_howworks />
+           
 
+            {/* Features & How it works (Moved from Home Dash) */}
+            <div className="bg-muted/30 border-y border-border/40 py-10">
+                <Landing_howworks />
+                <Landing_Features />
+            </div>
 
-            {/* Features Grid */}
-            <Landing_Features />
-
-            {/* FAQ Section */}
+             {/* FAQ Section */}
             <Landing_FAQs />
 
             {/* CTA Section */}
