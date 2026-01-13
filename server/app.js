@@ -9,6 +9,7 @@ import aiRoutes from "./routes/ai.routes.js";
 import userRoutes from "./routes/user.routes.js"
 import savedProblemRoutes from "./routes/savedProblem.routes.js";
 import visualizeRoutes from "./routes/visualize.routes.js"
+import documentRoutes from "./routes/pdf_qna_tool/document.routes.js"
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use("/ai", aiRoutes);
 app.use("/user", userRoutes);
 app.use("/problems", savedProblemRoutes);
 app.use("/visualize",visualizeRoutes);
+app.use('/documents', documentRoutes);
 
 dbConnection();
 

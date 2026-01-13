@@ -13,6 +13,9 @@ import SavedProblemDetails from "./pages/SavedProblemDetails";
 import { Toaster } from "react-hot-toast";
 import Profile from "./pages/Profile";
 import Visualize from "./pages/Visualize"
+import Upload from "./pages/pdf_qna_tool/Upload";
+import DoucmentView from "./pages/pdf_qna_tool/DoucmentView";
+import Historypage from "./pages/pdf_qna_tool/Historypage";
 
 const App = () => {
   return (
@@ -57,6 +60,9 @@ const App = () => {
           <Route path="/saved-problems" element={<ProtectedRoute> <SavedProblems /></ProtectedRoute>} />
           <Route path="/saved-problem/:id" element={<ProtectedRoute> <SavedProblemDetails /></ProtectedRoute>} />
           <Route path="/visualize" element={<ProtectedRoute> <Visualize /></ProtectedRoute>} />
+          <Route path="/document/:id" element={<ProtectedRoute> <DoucmentView /></ProtectedRoute>} />
+          <Route path="/documents" element={<ProtectedRoute> <Upload /></ProtectedRoute>} />
+          <Route path="/documents/history" element={<ProtectedRoute> <Historypage /></ProtectedRoute>} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
         </Routes>
