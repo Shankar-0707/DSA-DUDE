@@ -43,7 +43,7 @@ const Landing_footer = () => {
                         </div>
                         <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-center md:text-left">
                             <p className="text-muted-foreground text-xs md:text-sm order-2 md:order-1">
-                                © 2026 DSA-DUDE. Built for champions.
+                                © 2026 DSA-DUDE.
                             </p>
                             <div className="flex items-center gap-6 text-xs md:text-sm text-muted-foreground order-1 md:order-2">
                                 <button onClick={(e) => handleOpenPopup(e, 'privacy')} className="hover:text-primary transition-colors bg-transparent border-none cursor-pointer">Privacy</button>
