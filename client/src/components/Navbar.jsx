@@ -43,6 +43,7 @@ const Navbar = () => {
                 { name: 'History', path: '/documents/history', icon: HistoryIcon }
             ]
         },
+         { name: 'Quiz', path: '/quiz' },
     ];
 
     const handleNavigate = (path) => {
