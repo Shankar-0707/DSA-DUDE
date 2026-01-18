@@ -18,6 +18,8 @@ import DoucmentView from "./pages/pdf_qna_tool/DoucmentView";
 import Historypage from "./pages/pdf_qna_tool/Historypage";
 import Quiz from "./pages/Quiz/Quiz";
 import QuizLevel from "./pages/Quiz/QuizLevel";
+import QuizPlay from "./pages/Quiz/QuizPlay";
+import QuizResult from "./pages/Quiz/QuizResult";
 
 const App = () => {
   return (
@@ -67,6 +69,8 @@ const App = () => {
           <Route path="/documents/history" element={<ProtectedRoute> <Historypage /></ProtectedRoute>} />
           <Route path="/quiz" element={<ProtectedRoute> <Quiz /></ProtectedRoute>} />
           <Route path="/quiz/:topic" element={<ProtectedRoute> <QuizLevel /></ProtectedRoute>} />
+          <Route path="/quiz/:topic/:level" element={<ProtectedRoute> <QuizPlay /></ProtectedRoute>} />
+          <Route path="/quiz/:topic/:level/result" element={<ProtectedRoute> <QuizResult /></ProtectedRoute>} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
         </Routes>

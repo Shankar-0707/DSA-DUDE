@@ -10,6 +10,7 @@ import userRoutes from "./routes/user.routes.js"
 import savedProblemRoutes from "./routes/savedProblem.routes.js";
 import visualizeRoutes from "./routes/visualize.routes.js"
 import documentRoutes from "./routes/pdf_qna_tool/document.routes.js"
+import generateQuizRoutes from "./routes/Quiz/quiz.routes.js";
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use("/user", userRoutes);
 app.use("/problems", savedProblemRoutes);
 app.use("/visualize",visualizeRoutes);
 app.use('/documents', documentRoutes);
+app.use('/quiz', generateQuizRoutes)
 
 dbConnection();
 
