@@ -1,25 +1,25 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Landing from "./pages/Landing";
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
-import Home from "./pages/Home";
-import Problem from "./pages/Problem";
-import AIProblem from "./pages/AIProblem";
-import ManualProblem from "./pages/ManualProblem";
+import Landing from "./features/landing/Landing";
+import Signup from "./features/auth/Signup";
+import Login from "./features/auth/Login";
+import Home from "./features/home/Home";
+import Problem from "./features/approaches/Problem";
+import AIProblem from "./features/approaches/AIProblem";
+import ManualProblem from "./features/approaches/ManualProblem";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
-import SavedProblems from "./pages/SavedProblems";
-import SavedProblemDetails from "./pages/SavedProblemDetails";
+import SavedProblems from "./features/problems/SavedProblems";
+import SavedProblemDetails from "./features/problems/SavedProblemDetails";
 import { Toaster } from "react-hot-toast";
-import Profile from "./pages/Profile";
-import Visualize from "./pages/Visualize"
-import Upload from "./pages/pdf_qna_tool/Upload";
-import DoucmentView from "./pages/pdf_qna_tool/DoucmentView";
-import Historypage from "./pages/pdf_qna_tool/Historypage";
-import Quiz from "./pages/Quiz/Quiz";
-import QuizLevel from "./pages/Quiz/QuizLevel";
-import QuizPlay from "./pages/Quiz/QuizPlay";
-import QuizResult from "./pages/Quiz/QuizResult";
+import Profile from "./features/user/Profile";
+import Visualize from "./features/visualize/Visualize"
+import Upload from "./features/pdf/Upload";
+import DoucmentView from "./features/pdf/DocumentView";
+import Historypage from "./features/pdf/HistoryPage";
+import Quiz from "./features/quiz/Quiz";
+import QuizLevel from "./features/quiz/QuizLevel";
+import QuizPlay from "./features/quiz/QuizPlay";
+import QuizResult from "./features/quiz/QuizResult";
 
 const App = () => {
   return (

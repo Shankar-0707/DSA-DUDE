@@ -1,8 +1,0 @@
-config -> iske ander m apne env variables rkhunga
-controllers -> iske ander m apne functions likhunga jo ki actually work krenge
-database -> iske ander m apne database se connect krunga
-middlewares -> iske ander m apne sare middlewares ko rkhunga
-models -> iske ander m apne schema define kra krunga
-routes -> iske ander m apne routes define krunga
-app.js -> iske ander basic setup krunga
-server.js -> iske ander app ko call krunga

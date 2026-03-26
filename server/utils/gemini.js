@@ -4,29 +4,47 @@ if (!GEMINI_API_KEY) {
   throw new Error("GEMINI_API_KEY missing");
 }
 
-const GEMINI_ENDPOINT =
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+const MODELS = [
+  "gemini-2.0-flash",
+  "gemini-1.5-flash",
+  "gemini-1.5-flash-8b",
+];
 
 export async function callGemini(prompt) {
-  const response = await fetch(`${GEMINI_ENDPOINT}?key=${GEMINI_API_KEY}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      contents: [
-        {
-          parts: [{ text: prompt }],
-        },
-      ],
-    }),
-  });
+  let lastError;
 
-  if (!response.ok) {
+  for (const model of MODELS) {
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+    const response = await fetch(`${endpoint}?key=${GEMINI_API_KEY}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+      }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      return data.candidates[0].content.parts[0].text;
+    }
+
     const errText = await response.text();
+    let status;
+    try {
+      status = JSON.parse(errText)?.error?.code;
+    } catch {
+      status = response.status;
+    }
+
+    // If quota exceeded, try next model
+    if (status === 429) {
+      console.warn(`Model ${model} quota exceeded, trying next...`);
+      lastError = new Error(errText);
+      continue;
+    }
+
     throw new Error(errText);
   }
 
-  const data = await response.json();
-  return data.candidates[0].content.parts[0].text;
+  throw lastError || new Error("All Gemini models quota exceeded");
 }
