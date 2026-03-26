@@ -1,88 +1,40 @@
-import {GoogleGenAI} from "@google/genai";  // googleai ki services ab GoogleGenAI me h yani ye google ai models ko access kr skta h 
-import dotenv from "dotenv";
+import { callGroq } from "../../utils/groq.js";
 
-// hm yha dotenv isiliye import krre h taki APi key directly access ho ske
-dotenv.config();
-
-const ai = new GoogleGenAI({  // yha hm ek object create krre h jo ki hmare liye ai models se baat krega
-    apiKey : process.env.GEMINI_API_KEY,
-})
-const model = "gemini-2.5-flash";  // mtlb hm ye model use krna chah rhe h 
-
-/**
- * Generates a concise summary for a given text.
- * @param {string} text - The text to summarize.  function ko ek string type ka text milega
- */
 export const generateSummary = async (text) => {
     const prompt = `You are an expert document analyst.
 
-Task:
-Create a concise, clear, and professional summary of the document text provided below.
-
-Guidelines:
-- Use simple and easy-to-understand language.
-- Capture all main ideas and important insights.
-- Highlight KEY TERMS and IMPORTANT CONCEPTS by writing them in ALL CAPITAL LETTERS (do not use symbols like *, **, or backtick).
-- Present information in short paragraphs.
-- Use numbered or bulleted points ONLY where listing improves clarity.
-- Keep the tone neutral and professional.
-- Do not add any information that is not present in the original text.
+Create a concise, clear, and professional summary of the document text below.
+- Capture all main ideas and important insights
+- Use simple language
+- Keep the tone neutral and professional
+- Do not add information not present in the original text
 
 Document Text:
 ---
-${text}
+${text.slice(0, 8000)}
 ---
-`
 
-const response = await ai.models.generateContent({
-    model : model,
-    contents : [{role: 'user', parts : [{text : prompt}]}],
-});
+Respond with plain text summary only, no JSON.`;
 
-const text2 = response?.candidates?.[0]?.content?.parts?.[0]?.text;
-return text2.trim() || '';
-
+    const response = await callGroq(prompt, false);
+    return response.trim();
 };
 
-/**
- * Answers a question based on the provided document context.
- * @param {string} context - The document text to use as context.
- * @param {string} question - The user's question.
- */
 export const answerQuestion = async (context, question) => {
-    const prompt = `You are a precise and reliable question-answering assistant.
+    const prompt = `You are a precise question-answering assistant.
 
-Task:
-Answer the QUESTION using ONLY the information explicitly stated in the CONTEXT below.
-
-Rules:
-- Do not use any outside knowledge or assumptions.
-- If the answer is not clearly found in the context, respond with:
-  "The provided context does not contain enough information to answer this question."
-- Keep the answer clear, concise, and professional.
-- Use simple language.
-- Highlight IMPORTANT TERMS by writing them in ALL CAPITAL LETTERS.
-- Do NOT use markdown symbols, asterisks, or special formatting characters.
-- Use short paragraphs or numbered points only when it improves clarity.
-- Do not repeat the question in the answer.
+Answer the QUESTION using ONLY the information in the CONTEXT below.
+If the answer is not in the context, say: "The provided context does not contain enough information to answer this question."
 
 CONTEXT:
 ---
-${context}
+${context.slice(0, 8000)}
 ---
 
-QUESTION:
-${question}
-`
+QUESTION: ${question}
 
-const response = await ai.models.generateContent({
-    model : model,
-    contents : [{ role: 'user', parts: [{ text: prompt }] }],
-});
+Respond with a plain text answer only, no JSON.`;
 
-const text2 = response?.candidates?.[0]?.content?.parts?.[0]?.text;
-    return text2?.trim() || '';
-}
-
-
-
+    const response = await callGroq(prompt, false);
+    return response.trim();
+};
