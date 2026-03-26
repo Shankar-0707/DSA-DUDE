@@ -1,8 +1,4 @@
-import OpenAI from "openai";
-
-const client = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-});
+import { callGroq } from "../../utils/groq.js";
 
 // utility function
 const extractJSON = (text) => {
@@ -168,25 +164,7 @@ IMPORTANT: Generate exactly ${validatedCount} COMPLETELY DIFFERENT questions. No
     while (attempts < maxAttempts) {
         attempts++;
         try {
-            const response = await client.chat.completions.create({
-                model: "gpt-4o-mini",
-                messages: [
-                    {
-                        role: "system",
-                        content:
-                            "You are a backend API. Return ONLY valid raw JSON matching the given schema. No markdown, no backticks, no extra text."
-                    },
-                    {
-                        role: "user",
-                        content: prompt,
-                    },
-                ],
-                temperature: 0.3,
-                response_format: { type: "json_object" },
-                max_tokens: Math.min(4000, 200 * validatedCount), // Scale tokens with question count
-            });
-
-            const rawOutput = response.choices[0].message.content;
+            const rawOutput = await callGroq(prompt);
             
             try {
                 const data = extractJSON(rawOutput);
