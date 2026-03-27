@@ -49,10 +49,11 @@ export const signup = async (req, res, next) => {
         const token = generateToken(user._id);
 
         // 6.) Send Cookie
+        const isProduction = process.env.NODE_ENV === "production";
         res.cookie("token", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "strict",
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "strict",
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
 
@@ -112,10 +113,11 @@ export const login = async (req, res, next) => {
         const token = generateToken(user._id);
 
         // 4.) Set Cookie
+        const isProduction = process.env.NODE_ENV === "production";
         res.cookie("token", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "strict",
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "strict",
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
 

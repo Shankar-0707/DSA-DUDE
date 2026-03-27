@@ -16,23 +16,48 @@ import quizRoutes     from "./features/quiz/quiz.routes.js";
 
 const app = express();
 
-app.use(cors({
-    origin: process.env.FRONTEND_URL
-        ? process.env.FRONTEND_URL.split(",").map(u => u.trim())
-        : ["http://localhost:5173"],
-    methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true
-}));
+console.log("FRONTEND_URL:", process.env.FRONTEND_URL);
 
-// Handle preflight requests explicitly
-app.options("*", cors());
+const corsOptions = {
+    origin: (origin, callback) => {
+        const allowed = [
+            "http://localhost:5173",
+            "http://localhost:3000",
+            ...(process.env.FRONTEND_URL
+                ? process.env.FRONTEND_URL.split(",").map(u => u.trim())
+                : [])
+        ];
+        // Allow requests with no origin (mobile apps, curl, Postman, etc.)
+        if (!origin || allowed.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error(`CORS blocked: ${origin}`));
+        }
+    },
+    methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type"],
+    credentials: true
+};
+
+// Handle preflight OPTIONS requests with the SAME corsOptions (credentials + whitelist)
+app.options("/{*path}", cors(corsOptions));
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use("/auth",      authRoutes);
+
+// Temp debug route - remove after confirming env vars work
+app.get("/debug-env", (req, res) => {
+  res.json({
+    FRONTEND_URL: process.env.FRONTEND_URL || "NOT SET",
+    NODE_ENV: process.env.NODE_ENV || "NOT SET",
+    HAS_MONGO: !!process.env.MONGO_URI,
+    HAS_JWT: !!process.env.JWT_SECRET,
+  });
+});
 app.use("/ai",        aiRoutes);
 app.use("/user",      userRoutes);
 app.use("/problems",  problemRoutes);
