@@ -1,6 +1,7 @@
 import Document from "../../models/Document.js";
 import {extractTextFromPDF} from "./pdf.service.js";
 import {generateSummary, answerQuestion} from "./pdf.ai.service.js";
+import { uploadBufferToCloudinary } from "../../config/cloudinary.js";
 
 // POST -> /document/upload
 export const uploadAndSummarizeDocument = async (req, res) => {
@@ -10,10 +11,13 @@ export const uploadAndSummarizeDocument = async (req, res) => {
     const userId = req.user._id;
 
     try {
-        // 1.) Extract the text from in-memory buffer
+        // 1.) Upload raw PDF buffer to Cloudinary
+        const uploadResult = await uploadBufferToCloudinary(req.file.buffer);
+
+        // 2.) Extract the text from in-memory buffer
         const extractedText = await extractTextFromPDF(req.file.buffer);
 
-        //2.) Generate Summary 
+        // 3.) Generate Summary 
         const summary = await generateSummary(extractedText);
 
         // Save to db
@@ -22,12 +26,15 @@ export const uploadAndSummarizeDocument = async (req, res) => {
             user : userId,
             extractedText : extractedText,
             summary : summary,
-        })
+            pdfUrl: uploadResult.secure_url,
+            publicId: uploadResult.public_id
+        });
         await newDocument.save();
         res.status(201).json({
             id: newDocument._id,
             filename: newDocument.filename,
             summary: newDocument.summary,
+            pdfUrl: newDocument.pdfUrl
         });
     } catch (error) {
 

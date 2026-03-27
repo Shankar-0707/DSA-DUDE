@@ -88,12 +88,30 @@ const DoucmentView = () => {
                 </div>
 
                 <header className="space-y-3">
-                    <h1 className="text-2xl md:text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent break-words pb-1">
-                        {document.filename}
-                    </h1>
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <h1 className="text-2xl md:text-4xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent break-words pb-1">
+                            {document.filename}
+                        </h1>
+                        {document.pdfUrl && (
+                            <div className="flex items-center gap-2">
+                                <a href={document.pdfUrl} target="_blank" rel="noopener noreferrer">
+                                    <Button variant="outline" size="sm" className="gap-2 border-primary/20 hover:bg-primary/10 transition-colors">
+                                        <FileText className="w-4 h-4 text-primary" />
+                                        View
+                                    </Button>
+                                </a>
+                                <a href={document.pdfUrl.includes('/raw/upload/') ? document.pdfUrl : document.pdfUrl.replace("/upload/", "/upload/fl_attachment/")} download={document.filename}>
+                                    <Button variant="outline" size="sm" className="gap-2 border-primary/20 hover:bg-primary/10 transition-colors">
+                                        <Send className="w-4 h-4 rotate-90" />
+                                        Download
+                                    </Button>
+                                </a>
+                            </div>
+                        )}
+                    </div>
                     <p className="text-muted-foreground flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
                         <span className="flex items-center gap-1.5 font-medium text-primary/80">
-                            <FileText className="w-4 h-4" />
+                            <Sparkles className="w-4 h-4" />
                             PDF ANALYSIS
                         </span>
                         <span className="flex items-center gap-1.5">

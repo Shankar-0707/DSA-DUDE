@@ -32,6 +32,14 @@ const documentSchema = new mongoose.Schema({
     summary : {
         type : String
     },
+    pdfUrl: {
+        type: String,
+        required: true
+    },
+    publicId: {
+        type: String,
+        required: true
+    },
     qaHistory : [qaHistorySchema] // ye isiliye taki us pdf se related sare question bhi show ho
 },{
     timestamps : true

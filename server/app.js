@@ -1,12 +1,13 @@
 import "./env.js";
+import { configureCloudinary } from "./config/cloudinary.js";
+configureCloudinary();
 import express from "express";
-import { config } from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
 
 import dbConnection from "./database/dbConnection.js";
-import { errorMiddleware } from "./middlewares/error.js";
+import { errorMiddleware } from "./error/error.js";
 
 // Console Override Logic
 if (process.env.NODE_ENV === "production") {
