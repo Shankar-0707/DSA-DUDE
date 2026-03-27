@@ -1,10 +1,8 @@
 import pdfParse from "pdf-parse/lib/pdf-parse.js";
-import fs from "fs";
 
-export const extractTextFromPDF = async (filePath) => {
+export const extractTextFromPDF = async (buffer) => {
     try {
-        const dataBuffer = fs.readFileSync(filePath);
-        const data = await pdfParse(dataBuffer);
+        const data = await pdfParse(buffer);
         return data.text;
     } catch (error) {
         console.error(`Error parsing PDF: ${error}`);

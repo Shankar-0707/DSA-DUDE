@@ -1,7 +1,6 @@
 import Document from "../../models/Document.js";
 import {extractTextFromPDF} from "./pdf.service.js";
 import {generateSummary, answerQuestion} from "./pdf.ai.service.js";
-import fs from "fs";
 
 // POST -> /document/upload
 export const uploadAndSummarizeDocument = async (req, res) => {
@@ -9,11 +8,10 @@ export const uploadAndSummarizeDocument = async (req, res) => {
         return res.status(400).send({message:"No file uploaded"});
     }
     const userId = req.user._id;
-    const filePath = req.file.path;
 
     try {
-        // 1.) Extract the text
-        const extractedText = await extractTextFromPDF(filePath);
+        // 1.) Extract the text from in-memory buffer
+        const extractedText = await extractTextFromPDF(req.file.buffer);
 
         //2.) Generate Summary 
         const summary = await generateSummary(extractedText);
@@ -25,26 +23,16 @@ export const uploadAndSummarizeDocument = async (req, res) => {
             extractedText : extractedText,
             summary : summary,
         })
-        await newDocument.save();  // ye asynchronous function hota h isiliye await 
+        await newDocument.save();
         res.status(201).json({
             id: newDocument._id,
             filename: newDocument.filename,
             summary: newDocument.summary,
-            // extractedText is large, so generally don't send back in full response
         });
     } catch (error) {
-          console.error(error);
-    throw error;
+        console.error(error);
+        throw error;
     }
-    finally{
-        // Clean up the tempoorary file
-if (filePath) {
-        try {
-            fs.unlinkSync(filePath);
-        } catch (err) {
-            console.error("Failed to delete temp file:", err.message);
-        }
-    }    }
 };
 
 // POST /api/documents/:id/qa
