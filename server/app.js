@@ -25,6 +25,7 @@ import problemRoutes  from "./features/problems/problems.routes.js";
 import visualizeRoutes from "./features/visualize/visualize.routes.js";
 import pdfRoutes      from "./features/pdf/pdf.routes.js";
 import quizRoutes     from "./features/quiz/quiz.routes.js";
+import chatbotRoutes  from "./features/chatbot/chatbot.routes.js";
 
 const app = express();
 
@@ -75,6 +76,7 @@ app.use("/problems",  problemRoutes);
 app.use("/visualize", visualizeRoutes);
 app.use("/documents", pdfRoutes);
 app.use("/quiz",      quizRoutes);
+app.use("/chatbot",   chatbotRoutes);
 
 dbConnection();
 

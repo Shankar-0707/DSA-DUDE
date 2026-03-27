@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import ChatWidget from './ChatWidget';
 
 const ProtectedRoute = ({ children }) => {
     const { isAuthenticated, loading } = useAuth();
@@ -17,7 +18,12 @@ const ProtectedRoute = ({ children }) => {
         return <Navigate to="/login" replace />;
     }
 
-    return children;
+    return (
+        <>
+            {children}
+            <ChatWidget />
+        </>
+    );
 };
 
 export default ProtectedRoute;

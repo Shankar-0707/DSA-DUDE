@@ -6,3 +6,6 @@ const API = axios.create({
 });
 
 export default API;
+
+export const sendChatMessage = (message, history) =>
+  API.post("/chatbot/message", { message, history });
