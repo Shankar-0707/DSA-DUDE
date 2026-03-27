@@ -39,8 +39,7 @@ const corsOptions = {
     credentials: true
 };
 
-// Handle preflight OPTIONS requests with the SAME corsOptions (credentials + whitelist)
-app.options("/{*path}", cors(corsOptions));
+// app.use(cors) handles OPTIONS preflight automatically — no separate app.options() needed
 app.use(cors(corsOptions));
 
 app.use(express.json());
