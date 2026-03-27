@@ -3,11 +3,7 @@ import { generateQuiz } from "./quiz.service.js";
 const testQuizController = async (req, res) => {
     const { topic = "Queue", level = "Easy", count = 15 } = req.query;
 
-    console.log(`\n=== QUIZ TEST ===`);
-    console.log(`Topic: ${topic}`);
-    console.log(`Level: ${level}`);
-    console.log(`Count: ${count}`);
-    console.log(`================\n`);
+
 
     try {
         const startTime = Date.now();
@@ -32,16 +28,11 @@ const testQuizController = async (req, res) => {
             })) || []
         };
 
-        console.log(`\n=== RESULT ===`);
-        console.log(`Requested: ${result.requestedCount} questions`);
-        console.log(`Generated: ${result.actualCount} questions`);
-        console.log(`Time: ${result.generationTime}`);
-        console.log(`Success: ${result.actualCount === result.requestedCount}`);
-        console.log(`==============\n`);
+
 
         res.json(result);
     } catch (error) {
-        console.error("Quiz test error:", error);
+
         res.status(500).json({ 
             success: false,
             error: error.message,

@@ -5,7 +5,7 @@ export const extractTextFromPDF = async (buffer) => {
         const data = await pdfParse(buffer);
         return data.text;
     } catch (error) {
-        console.error(`Error parsing PDF: ${error}`);
+
         throw new Error("PDF processing failed.");
     }
 };

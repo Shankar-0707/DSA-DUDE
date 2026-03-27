@@ -1,10 +1,21 @@
 import "./env.js";
 import express from "express";
+import { config } from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
+
 import dbConnection from "./database/dbConnection.js";
-import { errorMiddleware } from "./error/error.js";
+import { errorMiddleware } from "./middlewares/error.js";
+
+// Console Override Logic
+if (process.env.NODE_ENV === "production") {
+    console.log = () => {};
+    console.error = () => {};
+    console.warn = () => {};
+    console.info = () => {};
+    console.debug = () => {};
+}
 
 import authRoutes     from "./features/auth/auth.routes.js";
 import aiRoutes       from "./features/ai/ai.routes.js";
@@ -16,7 +27,7 @@ import quizRoutes     from "./features/quiz/quiz.routes.js";
 
 const app = express();
 
-console.log("FRONTEND_URL:", process.env.FRONTEND_URL);
+
 
 const corsOptions = {
     origin: (origin, callback) => {

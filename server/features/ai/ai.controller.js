@@ -70,12 +70,12 @@ Follow the exact same \\n pattern shown above for ALL code. No markdown fences.`
       complexity: parsed.complexity,
       solutions: parsed.solutions,
       type: "solve",
-    }).catch(err => console.error("DB save error:", err.message));
+    }).catch(err => {});
 
     return res.json(parsed);
 
   } catch (error) {
-    console.error("SOLVE ERROR:", error.message);
+
     return res.status(500).json({
       error: "AI service failed. Please check your OpenAI API key and billing.",
       details: error.message
@@ -122,12 +122,12 @@ Return ONLY this JSON (no markdown, no backticks, no extra text):
       problemDescription: parsed.problem,
       constraints: parsed.constraints,
       type: "search",
-    }).catch(err => console.error("DB save error:", err.message));
+    }).catch(err => {});
 
     return res.json(parsed);
 
   } catch (error) {
-    console.error("SEARCH ERROR:", error.message);
+
     return res.status(500).json({
       error: "AI service failed. Please check your OpenAI API key and billing.",
       details: error.message

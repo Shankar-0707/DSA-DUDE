@@ -102,7 +102,7 @@ export default function QuizPlay() {
                     throw new Error('Invalid quiz data format received');
                 }
             } catch (error) {
-                console.error("Failed to fetch quiz:", error);
+
                 // Show error state or fallback
                 setQuestions([{
                     question: "Unable to load quiz questions. Please try again later.",
@@ -171,7 +171,7 @@ export default function QuizPlay() {
 
             navigate(`/quiz/${topic}/${level}/result`);
         } catch (error) {
-            console.error('Error submitting quiz:', error);
+
             setIsSubmitting(false);
         }
     }, [activeQuestions, answers, time, storageKey, navigate, topic, level, isSubmitting]);

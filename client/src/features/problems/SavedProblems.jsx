@@ -18,7 +18,7 @@ const SavedProblems = () => {
             const res = await API.get('/problems/list');
             setProblems(res.data);
         } catch (error) {
-            console.error("Failed to fetch saved problems:", error);
+
         } finally {
             setLoading(false);
         }
@@ -32,7 +32,7 @@ const SavedProblems = () => {
             await API.delete(`/problems/${id}`);
             setProblems(prev => prev.filter(p => p._id !== id));
         } catch (error) {
-            console.error("Failed to delete problem:", error);
+
         }
     };
 

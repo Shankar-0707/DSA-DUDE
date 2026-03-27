@@ -22,7 +22,7 @@ const SavedProblemDetails = () => {
                     setActiveTab(Object.keys(res.data.solutions)[0]);
                 }
             } catch (error) {
-                console.error("Failed to fetch problem:", error);
+
                 toast.error("Failed to load problem details.");
             } finally {
                 setLoading(false);
@@ -38,7 +38,7 @@ const SavedProblemDetails = () => {
             toast.success("Problem deleted");
             navigate('/saved-problems');
         } catch (error) {
-            console.error("Delete failed:", error);
+
             toast.error("Failed to delete problem");
         }
     };

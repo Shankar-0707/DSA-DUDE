@@ -30,7 +30,7 @@ export const uploadAndSummarizeDocument = async (req, res) => {
             summary: newDocument.summary,
         });
     } catch (error) {
-        console.error(error);
+
         throw error;
     }
 };
@@ -58,7 +58,7 @@ export const handleQuestion = async (req, res) => {
         res.status(200).json({ answer, history: document.qaHistory });
     }
     catch (error) {
-         console.error(error);
+
     throw error;
     }
 };
@@ -73,7 +73,7 @@ export const getDocumentDetails = async (req, res) => {
         res.status(200).json(document);
     }
     catch (error) {
- console.error(error);
+
     throw error;    }
 }
 
@@ -86,7 +86,7 @@ export const getUserDocuments =  async (req,res) => {
             res.status(200).json(documents);
         }
         catch(error){
-             console.error(error);
+
     throw error;
         }
 }

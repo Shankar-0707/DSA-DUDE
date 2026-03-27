@@ -12,9 +12,7 @@ export async function callOpenAI(prompt, retries = 0) {
     throw new Error("OpenAI API key not configured");
   }
   try {
-    console.log("Making OpenAI API call...");
-    console.log("API Key exists:", !!process.env.OPENAI_API_KEY);
-    console.log("API Key length:", process.env.OPENAI_API_KEY?.length);
+
     
     const response = await openai.chat.completions.create({
       model: "gpt-4o-mini",
@@ -32,16 +30,11 @@ export async function callOpenAI(prompt, retries = 0) {
       max_tokens: 2000,
     });
 
-    console.log("OpenAI API call successful");
+
     return response.choices[0].message.content;
     
   } catch (error) {
-    console.error("OpenAI API Error Details:");
-    console.error("- Message:", error.message);
-    console.error("- Status:", error.status);
-    console.error("- Code:", error.code);
-    console.error("- Type:", error.type);
-    console.error("- Full error:", error);
+
     
     // Re-throw the error with more context
     const enhancedError = new Error(`OpenAI API Error: ${error.message}`);

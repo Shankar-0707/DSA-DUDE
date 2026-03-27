@@ -15,7 +15,7 @@ export default function Profile() {
                 const res = await API.get("/user/profile");
                 setUser(res.data);
             } catch (err) {
-                console.error(err);
+
             }
         }
         fetchProfile();

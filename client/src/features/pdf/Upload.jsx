@@ -30,7 +30,7 @@ const Upload = () => {
             const response = await uploadDocument(file);
             navigate(`/document/${response.data.id}`);
         } catch (error) {
-            console.error(error);
+
             setError("Upload failed. Please try again. (Is the server running?)");
         }
         finally {

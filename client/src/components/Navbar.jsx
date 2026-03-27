@@ -18,7 +18,7 @@ const Navbar = () => {
             logout(); // Clear client-side state
             navigate('/login');
         } catch (error) {
-            console.error('Logout failed:', error);
+
             logout();
             navigate('/login');
         }

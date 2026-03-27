@@ -31,7 +31,7 @@ const validateAndCleanQuizData = (data) => {
         throw new Error("Invalid format: questions array missing");
     }
 
-    console.log(`Validating ${data.questions.length} questions`);
+
 
     // Check for duplicate questions
     const questionTexts = new Set();
@@ -45,7 +45,7 @@ const validateAndCleanQuizData = (data) => {
             !q.options.includes(q.correctAnswer) ||
             typeof q.explanation !== "string"
         ) {
-            console.error(`Invalid question at index ${i}:`, q);
+
             throw new Error(`Invalid question at index ${i}`);
         }
         
@@ -66,11 +66,11 @@ const validateAndCleanQuizData = (data) => {
     });
 
     if (duplicates.length > 0) {
-        console.error(`Found ${duplicates.length} duplicate questions at indices:`, duplicates);
+
         throw new Error(`Duplicate questions found at indices: ${duplicates.join(', ')}`);
     }
 
-    console.log(`Successfully validated ${data.questions.length} unique questions`);
+
     return data;
 };
 
@@ -79,7 +79,7 @@ export async function generateQuiz({ topic, level, count }) {
     const maxQuestions = 20;
     const validatedCount = Math.min(Math.max(parseInt(count) || 10, 1), maxQuestions);
     
-    console.log(`Generating ${validatedCount} unique questions for ${topic} at ${level} level`);
+
     
     const prompt = `
 Generate exactly ${validatedCount} UNIQUE multiple-choice questions for the topic "${topic}" at "${level}" difficulty level.
@@ -171,16 +171,15 @@ IMPORTANT: Generate exactly ${validatedCount} COMPLETELY DIFFERENT questions. No
                 const validatedData = validateAndCleanQuizData(data);
                 return validatedData;
             } catch (parseErr) {
-                console.error("Failed to parse AI output. Raw output start:", rawOutput.substring(0, 200));
-                console.error("Parse error:", parseErr.message);
+
                 throw parseErr;
             }
 
         } catch (err) {
-            console.error(`Attempt ${attempts} failed to generate quiz:`, err.message);
+
             if (attempts === maxAttempts) {
                 // Return a fallback quiz if all attempts fail
-                console.error("All attempts failed, returning fallback quiz");
+
                 const fallbackQuestions = [];
                 
                 // Create unique fallback questions for the topic

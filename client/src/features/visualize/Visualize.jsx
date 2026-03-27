@@ -35,7 +35,7 @@ export default function Visualize() {
                 setCustomInput(res.data.suggestedInput);
             }
         } catch (error) {
-            console.error("Validation error:", error);
+
         } finally {
             setLoading(false);
         }
@@ -65,7 +65,7 @@ export default function Visualize() {
             );
             setTrace(res.data);
         } catch (error) {
-            console.error("Visualization error:", error);
+
         } finally {
             setVisualizing(false);
         }

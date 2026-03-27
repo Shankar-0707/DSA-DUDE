@@ -30,7 +30,7 @@ const ManualProblem = () => {
             const response = await API.post('/ai/approach', { problem, constraints });
             setResult(response.data);
         } catch (error) {
-            console.error('Solve failed:', error);
+
         } finally {
             setLoading(false);
         }
@@ -55,7 +55,7 @@ const ManualProblem = () => {
             toast.success("Problem saved successfully!");
             setSaved(true);
         } catch (error) {
-            console.error("Failed to save:", error);
+
             toast.error("Failed to save problem.");
         }
     };

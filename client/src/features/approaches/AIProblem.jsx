@@ -20,12 +20,12 @@ const AIProblem = () => {
         setFoundProblem(null);
         setSolutionResult(null);
         try {
-            console.log("first");
+
             const response = await API.post('/ai/search-name', { name: searchQuery }, { withCredentials: true });
             setFoundProblem(response.data);
-            console.log("second");
+
         } catch (error) {
-            console.error('Search failed:', error);
+
             const errorMessage = error.response?.data?.error || "Failed to search problem. Please try again.";
             toast.error(errorMessage);
         } finally {
@@ -43,7 +43,7 @@ const AIProblem = () => {
             });
             setSolutionResult(response.data);
         } catch (error) {
-            console.error('Analysis failed:', error);
+
             const errorMessage = error.response?.data?.error || "Failed to analyze problem. Please try again.";
             toast.error(errorMessage);
         } finally {
@@ -70,7 +70,7 @@ const AIProblem = () => {
             toast.success("Problem saved successfully!");
             setSaved(true);
         } catch (error) {
-            console.error("Failed to save:", error);
+
             toast.error("Failed to save problem.");
         }
     };
